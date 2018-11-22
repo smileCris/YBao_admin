@@ -19,9 +19,9 @@ class NoticeData {
   // 编辑
   async edit(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'UPDATE notice_data SET content = ? WHERE id = ?'
-      let params = [getdata.content.toString(), getdata.id]
+      let params = [getdata.content, getdata.id]
       let resdata = await query(sql, params)
       console.log(resdata)
     })
@@ -34,7 +34,7 @@ class NoticeData {
   // 删除
   async delete(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'DELETE FROM notice_data WHERE id = ?'
       let params = [getdata.id]
       let resdata = await query(sql, params)
@@ -49,9 +49,9 @@ class NoticeData {
   // 增加
   async add(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'INSERT INTO notice_data(content, ctime) VALUES(?, ?)'
-      let params = [getdata.content.toString(), now.toString()]
+      let params = [getdata.content, now]
       let resdata = await query(sql, params)
       console.log(resdata)
     })

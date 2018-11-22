@@ -19,9 +19,9 @@ class CircleTheme {
   // 编辑
   async edit(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'UPDATE circle_theme SET theme = ? WHERE id = ?'
-      let params = [getdata.theme.toString(), getdata.id]
+      let params = [getdata.theme, getdata.id]
       let resdata = await query(sql, params)
       console.log(resdata)
     })

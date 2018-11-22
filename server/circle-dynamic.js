@@ -17,7 +17,7 @@ class CircleDynamic {
   // 删除
   async delete(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'DELETE FROM circle_dynamic WHERE id = ?'
       let params = [getdata.id]
       let resdata = await query(sql, params)

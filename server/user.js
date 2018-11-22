@@ -17,7 +17,7 @@ class UserData {
   // 禁用
   async stop(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'UPDATE user_data SET status = ? WHERE id = ?'
       let params = [getdata.status, getdata.id]
       let resdata = await query(sql, params)

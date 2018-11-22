@@ -19,9 +19,9 @@ class StoryData {
   // 编辑
   async edit(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'UPDATE story_data SET name = ? WHERE id = ?'
-      let params = [getdata.name.toString(), getdata.id]
+      let params = [getdata.name, getdata.id]
       let resdata = await query(sql, params)
       console.log(resdata)
     })
@@ -34,7 +34,7 @@ class StoryData {
   // 删除
   async delete(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'DELETE FROM story_data WHERE id = ?'
       let params = [getdata.id]
       let resdata = await query(sql, params)
@@ -49,9 +49,9 @@ class StoryData {
   // 增加
   async add(ctx) {
     ctx.req.on('data', async (data) => {
-      let getdata = JSON.parse(data.toString())
+      let getdata = JSON.parse(data)
       let sql = 'INSERT INTO story_data(name, file, img, ctime) VALUES(?, ?, ?, ?)'
-      let params = [getdata.name.toString(), getdata.file, getdata.img, now.toString()]
+      let params = [getdata.name, getdata.file, getdata.img, now]
       let resdata = await query(sql, params)
       console.log(resdata)
     })
