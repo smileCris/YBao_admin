@@ -1,7 +1,10 @@
 const Koa = require('koa')
 const app = new Koa()
-
 const router = require('koa-router')()
+
+const path = require('path')
+const static = require('koa-static')
+
 const traffic = require('./server/traffic')
 const story = require('./server/story')
 const circleTheme = require('./server/circle-theme')
@@ -23,6 +26,8 @@ router
   .post('/api/story/edit', story.edit) // 故事编辑
   .post('/api/story/delete', story.delete) // 删除故事
   .post('/api/story/add', story.add) // 添加故事
+  .post('/api/story/addPic', story.addPic) // 添加故事-上传图片
+  .post('/api/story/addFile', story.addFile) // 添加故事-上传文件
 
   // 妈妈圈模块
   .get('/api/circle/listTheme', circleTheme.list) // 主题列表
@@ -55,6 +60,11 @@ router
 
 
 app.use(router.routes(), router.allowedMethods())
+
+app.on('error', () => {})
+app.use(static(
+  path.join(__dirname, '/server/upload/upload-files/common')
+))
 
 app.listen(3000, () => {
   console.log('应用实例，访问地址为  http://127.0.0.1:3000')
