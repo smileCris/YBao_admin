@@ -1,6 +1,4 @@
 const { query } = require('../async-db')
-const date = new Date();
-const now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
 
 // 妈妈圈主题数据
 class CircleTheme {
@@ -48,6 +46,8 @@ class CircleTheme {
 
   // 增加
   async add(ctx) {
+    let date = new Date()
+    let now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
     ctx.req.on('data', async (data) => {
       let getdata = JSON.parse(data.toString())
       let sql = 'INSERT INTO circle_theme(theme, accountName, ctime) VALUES(?, ?, ?)'

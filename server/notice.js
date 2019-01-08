@@ -1,6 +1,4 @@
 const { query } = require('../async-db')
-const date = new Date();
-const now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
 
 // 通知数据
 class NoticeData {
@@ -48,6 +46,8 @@ class NoticeData {
 
   // 增加
   async add(ctx) {
+    let date = new Date()
+    let now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
     ctx.req.on('data', async (data) => {
       let getdata = JSON.parse(data)
       let sql = 'INSERT INTO notice_data(content, ctime) VALUES(?, ?)'

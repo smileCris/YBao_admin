@@ -1,6 +1,4 @@
 const { query } = require('../async-db')
-const date = new Date()
-const now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
 
 // 管理员数据
 class AdminData {
@@ -75,6 +73,8 @@ class AdminData {
 
   // 增加
   async add(ctx) {
+    let date = new Date()
+    let now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
     ctx.req.on('data', async (data) => {
       let getdata = JSON.parse(data)
       let sql = 'INSERT INTO admin_data(username, password, avatar, email, address, ctime) VALUES(?, ?, ?, ?, ?, ?)'
