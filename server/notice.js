@@ -50,8 +50,8 @@ class NoticeData {
     let now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
     ctx.req.on('data', async (data) => {
       let getdata = JSON.parse(data)
-      let sql = 'INSERT INTO notice_data(content, ctime) VALUES(?, ?)'
-      let params = [getdata.content, now]
+      let sql = 'INSERT INTO notice_data(content, accountName, ctime) VALUES(?, ?, ?)'
+      let params = [getdata.content, getdata.accountName, now]
       let resdata = await query(sql, params)
       console.log(resdata)
     })
