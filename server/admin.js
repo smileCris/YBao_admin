@@ -77,10 +77,11 @@ class AdminData {
     let now = date.toLocaleDateString() + ' ' + date.toLocaleTimeString('chinese', { hour12: false })
     ctx.req.on('data', async (data) => {
       let getdata = JSON.parse(data)
-      let sql = 'INSERT INTO admin_data(username, password, avatar, email, address, ctime) VALUES(?, ?, ?, ?, ?, ?)'
+      let sql = 'INSERT INTO admin_data(username, password, status, avatar, email, address, ctime) VALUES(?, ?, ?, ?, ?, ?, ?)'
       let params = [
         getdata.username,
         getdata.password,
+        1,
         getdata.avatar,
         getdata.email,
         getdata.address,
